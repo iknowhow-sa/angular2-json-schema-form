@@ -7,7 +7,7 @@ import { hasOwn } from './../../shared/utility.functions';
 @Component({
   selector: 'material-checkbox-widget',
   template: `
-    <mat-checkbox *ngIf="boundControl && !showSlideToggle"
+    <mat-checkbox *ngIf="boundControl && !showSlideToggle && isConditionallyShown()"
       [formControl]="formControl"
       align="left"
       [color]="options?.color || 'primary'"
@@ -83,6 +83,7 @@ export class MaterialCheckboxComponent implements OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() data:any;
 
   constructor(
     private jsf: JsonSchemaFormService
@@ -109,5 +110,20 @@ export class MaterialCheckboxComponent implements OnInit {
 
   get isChecked() {
     return this.jsf.getFormControlValue(this) === this.trueValue;
+  }
+
+  isConditionallyShown(): boolean {
+
+      this.data = this.jsf.data;
+      let result: boolean = true;
+      if (this.data && hasOwn(this.options, 'condition')) {
+          const model = this.data;
+
+          /* tslint:disable */
+          eval('result = ' + this.options.condition);
+          /* tslint:enable */
+      }
+
+      return result;
   }
 }

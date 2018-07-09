@@ -50,16 +50,23 @@ export class JsonPointer {
       if (!isDefined(endSlice) || endSlice >= keyArray.length) { endSlice = keyArray.length; }
       keyArray = keyArray.slice(startSlice, endSlice);
       for (let key of keyArray) {
+        console.log("key",key);
+        console.log(subObject);
+          console.log("isMap",isMap(subObject));
+
         if (key === '-' && isArray(subObject) && subObject.length) {
           key = subObject.length - 1;
         }
         if (isMap(subObject) && subObject.has(key)) {
+          console.log("1");
           subObject = subObject.get(key);
         } else if (typeof subObject === 'object' && subObject !== null &&
           hasOwn(subObject, key)
         ) {
+            console.log("3");
           subObject = subObject[key];
         } else {
+            console.log("4");
           if (errors) {
             console.error(`get error: "${key}" key not found in object.`);
             console.error(pointer);
@@ -68,6 +75,7 @@ export class JsonPointer {
           return getBoolean ? false : undefined;
         }
       }
+      console.log("wpalakia to subObject",subObject);
       return getBoolean ? true : subObject;
     }
     if (errors && keyArray === null) {

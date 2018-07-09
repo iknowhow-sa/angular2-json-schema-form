@@ -2,6 +2,7 @@ import { Component, Input, Host } from '@angular/core';
 
 import { JsonSchemaFormService } from '../json-schema-form.service';
 import { hasValue, JsonPointer } from '../shared';
+import { hasOwn } from './../shared/utility.functions';
 
 @Component({
   selector: 'root-widget',
@@ -54,6 +55,9 @@ export class RootComponent {
   @Input() layout: any[];
   @Input() isOrderable: boolean;
   @Input() isFlexItem = false;
+  @Input() layoutIndexTabs: number[];
+  @Input() dataIndexTabs: number[];
+  @Input() data: any;
 
   constructor(
     private jsf: JsonSchemaFormService
@@ -75,4 +79,14 @@ export class RootComponent {
   showWidget(layoutNode: any): boolean {
     return this.jsf.evaluateCondition(layoutNode, this.dataIndex);
   }
+
+    isConditionallyShown(layoutItem: any): boolean {
+        let result: boolean = true;
+        if (this.data && hasOwn(layoutItem, 'condition')) {
+            const model = this.data;
+            eval('result = ' + layoutItem.condition);
+            /* tslint:enable */
+        }
+        return result;
+    }
 }

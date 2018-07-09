@@ -24,6 +24,7 @@ import { hasOwn, isArray, isDefined, toTitleCase } from '../../shared';
       <select-widget-widget
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
+        [data]="data"
         [layoutNode]="widgetLayoutNode"></select-widget-widget>
     </div>
     <div class="spacer" *ngIf="widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'"></div>`,
@@ -79,6 +80,7 @@ export class MaterialDesignFrameworkComponent implements OnInit, OnChanges {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() data: any;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -110,6 +112,7 @@ export class MaterialDesignFrameworkComponent implements OnInit, OnChanges {
 
   initializeFramework() {
     if (this.layoutNode) {
+      this.data = this.jsf.data;
       this.options = _.cloneDeep(this.layoutNode.options || {});
       this.widgetLayoutNode = {
         ...this.layoutNode,
