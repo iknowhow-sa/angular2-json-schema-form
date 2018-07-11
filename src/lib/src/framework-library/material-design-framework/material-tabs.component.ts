@@ -12,7 +12,8 @@ import { JsonPointer } from '../../shared';
       [style.width]="'100%'">
         <a *ngFor="let item of layoutNode?.items; let i = index"
           md-tab-link
-          [active]="selectedItem === i"
+          [active]="selectedItem === i" 
+          [ngClass]="(selectedItem === i) ? 'tab-active' : ''"
           (click)="select(i)">
           <span *ngIf="showAddTab || item.type !== '$ref'"
             [innerHTML]="setTitle(item, i)"></span>
