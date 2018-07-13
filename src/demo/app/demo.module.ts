@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
@@ -16,6 +16,8 @@ import { DemoComponent } from './demo.component';
 import { DemoRootComponent } from './demo-root.component';
 
 import { routes } from './demo.routes';
+import { VacDatepickerComponent } from "../../lib/src/framework-library/vac-datepicker/vac-datepicker.component";
+
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { routes } from './demo.routes';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FlexLayoutModule,
-    FormsModule, HttpModule, MaterialModule,
+    FormsModule,ReactiveFormsModule, HttpModule, MaterialModule,
     RouterModule.forRoot(routes), JsonSchemaFormModule
   ],
   providers: [ ],
-  bootstrap: [ DemoRootComponent ]
+  bootstrap: [ DemoRootComponent ],
+  entryComponents: [
+      VacDatepickerComponent,
+  ]
 })
 export class DemoModule { }

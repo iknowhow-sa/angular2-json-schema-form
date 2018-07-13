@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
+import {VacDatepickerComponent} from "../../lib/src/framework-library/vac-datepicker/vac-datepicker.component";
 
 import 'rxjs/add/operator/map';
 
@@ -24,7 +25,11 @@ import { Examples } from './example-schemas.model';
   ],
 })
 export class DemoComponent implements OnInit {
-  examples: any = Examples;
+    yourNewWidgets = {
+        date: VacDatepickerComponent         // Replace existing 'date' widget
+    }
+
+    examples: any = Examples;
   frameworkList: any = ['material-design', 'bootstrap-3', 'no-framework'];
   frameworks: any = {
     'material-design': 'Material Design framework',

@@ -80,3 +80,4 @@ export { JsonSchemaFormService } from './src/json-schema-form.service';
 export { JsonSchemaFormModule } from './src/json-schema-form.module';
 export { FrameworkLibraryService } from './src/framework-library/framework-library.service';
 export { WidgetLibraryService } from './src/widget-library/widget-library.service';
+export { VacDatepickerComponent } from './src/framework-library/vac-datepicker/vac-datepicker.component';

@@ -11,17 +11,26 @@ import { JsonSchemaFormService } from './json-schema-form.service';
 import { FrameworkLibraryService } from './framework-library/framework-library.service';
 import { WidgetLibraryService } from './widget-library/widget-library.service';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { MyDatePickerModule } from 'mydatepicker';
+import { VacDatepickerComponent } from "./framework-library/vac-datepicker/vac-datepicker.component";
+import { MdFormFieldModule } from '@angular/material';
+
+
 @NgModule({
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    FrameworkLibraryModule, WidgetLibraryModule
+    FrameworkLibraryModule, WidgetLibraryModule,BrowserModule, MdFormFieldModule, MyDatePickerModule
   ],
-  declarations: [ JsonSchemaFormComponent ],
+  declarations: [ JsonSchemaFormComponent, VacDatepickerComponent ],
   exports: [
     JsonSchemaFormComponent, FrameworkLibraryModule, WidgetLibraryModule
   ],
   providers: [
     JsonSchemaFormService, FrameworkLibraryService, WidgetLibraryService
+  ],
+  entryComponents: [
+      VacDatepickerComponent
   ]
 })
 export class JsonSchemaFormModule { }
