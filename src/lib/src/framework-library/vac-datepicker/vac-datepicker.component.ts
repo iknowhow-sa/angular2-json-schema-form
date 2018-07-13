@@ -80,7 +80,7 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
             this.model = { date: { year: controlDate.getFullYear(), month: controlDate.getMonth()+1, day: controlDate.getDate() } };
         }
         else{
-            this.model = { date: {}}
+            this.model = { date: { year: "", month: "", day: ""}}
         }
 
         this.options = this.layoutNode.options || {};
@@ -130,6 +130,6 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
         if(date){
             return { year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate() }
         }
-        return {};
+        return null;
     }
 }
