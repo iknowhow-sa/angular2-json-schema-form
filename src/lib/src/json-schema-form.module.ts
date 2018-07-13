@@ -15,13 +15,21 @@ import { Framework } from './framework-library/framework';
 import { NoFramework } from './framework-library/no-framework/no.framework';
 import { NoFrameworkModule } from './framework-library/no-framework/no-framework.module';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { MyDatePickerModule } from 'mydatepicker';
+import { VacDatepickerComponent } from "./framework-library/vac-datepicker/vac-datepicker.component";
+import { MatFormFieldModule } from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    WidgetLibraryModule, NoFrameworkModule
+    WidgetLibraryModule, NoFrameworkModule,BrowserModule, MatFormFieldModule, MyDatePickerModule
   ],
-  declarations: [ JsonSchemaFormComponent ],
-  exports: [ JsonSchemaFormComponent, WidgetLibraryModule ]
+  declarations: [ JsonSchemaFormComponent , VacDatepickerComponent],
+  exports: [ JsonSchemaFormComponent, WidgetLibraryModule ],
+  entryComponents: [
+      VacDatepickerComponent
+  ]
 })
 export class JsonSchemaFormModule {
   static forRoot(...frameworks): ModuleWithProviders {

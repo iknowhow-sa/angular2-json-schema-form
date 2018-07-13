@@ -92,7 +92,7 @@ export class MaterialDatepickerComponent implements OnInit, OnChanges {
   }
 
   updateValue(event) {
-    this.options.showErrors = true;
+      this.options.showErrors = true;
     this.jsf.updateValue(this, dateToString(event, this.options));
   }
 }

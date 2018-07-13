@@ -54,12 +54,22 @@ export function stringToDate(dateString) {
   } else if (/^\d{8}$/.test(getDate)) {
     dateParts = [+getDate.slice(0, 4), +getDate.slice(4, 6), +getDate.slice(6)];
   }
+  console.log("dateParts",dateParts);
   const thisYear = +(new Date().getFullYear() + '').slice(-2);
   // Check for [YYYY, MM, DD]
   if (dateParts[0] > 1000 && dateParts[0] < 2100 && dateParts[1] <= 12 && dateParts[2] <= 31) {
     return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
   // Check for [MM, DD, YYYY]
-  } else if (dateParts[0] <= 12 && dateParts[1] <= 31 && dateParts[2] > 1000 && dateParts[2] < 2100) {
+  }   // Check for [DD, MM, YYYY]
+  else if (dateParts[1] <= 12 && dateParts[0] <= 31 && dateParts[2] > 1000 && dateParts[2] < 2100) {
+    return new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    // Check for [DD, MM, YY]
+  }
+  else if (dateParts[1] <= 12 && dateParts[0] <= 31 && dateParts[2] < 100) {
+    const year = (dateParts[2] <= thisYear ? 2000 : 1900) + dateParts[2];
+    return new Date(year, dateParts[1] - 1, dateParts[0]);
+  }
+  else if (dateParts[0] <= 12 && dateParts[1] <= 31 && dateParts[2] > 1000 && dateParts[2] < 2100) {
     return new Date(dateParts[2], dateParts[0] - 1, dateParts[1]);
   // Check for [MM, DD, YY]
   } else if (dateParts[0] <= 12 && dateParts[1] <= 31 && dateParts[2] < 100) {

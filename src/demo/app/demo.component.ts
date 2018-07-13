@@ -9,6 +9,9 @@ import 'rxjs/add/operator/map';
 import { Examples } from './example-schemas.model';
 import { JsonPointer } from '../../lib/src/shared';
 
+import {VacDatepickerComponent} from "../../lib/src/framework-library/vac-datepicker/vac-datepicker.component";
+
+
 @Component({
   selector: 'demo',
   templateUrl: 'demo.component.html',
@@ -26,6 +29,9 @@ import { JsonPointer } from '../../lib/src/shared';
   ],
 })
 export class DemoComponent implements OnInit {
+  yourNewWidgets = {
+        date: VacDatepickerComponent         // Replace existing 'date' widget
+    }
   examples: any = Examples;
   languageList: any = ['en', 'fr'];
   languages: any = {

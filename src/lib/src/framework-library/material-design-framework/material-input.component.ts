@@ -92,7 +92,7 @@ export class MaterialInputComponent implements OnInit {
   }
 
   isConditionallyShown(): boolean {
-console.log("den ekteloumai kan!");
+
       this.data = this.jsf.data;
       let result: boolean = true;
       if (this.data && hasOwn(this.options, 'condition')) {

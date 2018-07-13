@@ -56,7 +56,8 @@
   },
   "dependencies": {
     "ajv": "^6.0.1",
-    "lodash": "4.x"
+    "lodash": "4.x",
+    "mydatepicker": "^2.6.3"
   },
   "peerDependencies": {
     "@angular/cdk": ">=5.0.0",

@@ -98,3 +98,5 @@ export { Bootstrap3FrameworkModule } from './src/framework-library/bootstrap-3-f
 export { Bootstrap4Framework } from './src/framework-library/bootstrap-4-framework/bootstrap-4.framework';
 export { Bootstrap4FrameworkComponent } from './src/framework-library/bootstrap-4-framework/bootstrap-4-framework.component';
 export { Bootstrap4FrameworkModule } from './src/framework-library/bootstrap-4-framework/bootstrap-4-framework.module';
+
+export { VacDatepickerComponent } from './src/framework-library/vac-datepicker/vac-datepicker.component';

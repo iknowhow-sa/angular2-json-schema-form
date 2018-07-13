@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule,
   MatMenuModule, MatSelectModule, MatToolbarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { VacDatepickerComponent } from "../../lib/src/framework-library/vac-datepicker/vac-datepicker.component";
 
 import {
   JsonSchemaFormModule, NoFrameworkModule, MaterialDesignFrameworkModule,
@@ -34,7 +35,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @NgModule({
   declarations: [ AceEditorDirective, DemoComponent, DemoRootComponent ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FlexLayoutModule, FormsModule,
+    BrowserModule, BrowserAnimationsModule, FlexLayoutModule, FormsModule,ReactiveFormsModule,
     HttpClientModule, MatButtonModule, MatCardModule, MatCheckboxModule,
     MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule,
     RouterModule.forRoot(routes),
@@ -49,7 +50,10 @@ import { ActivatedRoute, Router } from '@angular/router';
       Bootstrap4FrameworkModule
     )
   ],
-  bootstrap: [ DemoRootComponent ]
+  bootstrap: [ DemoRootComponent ],
+    entryComponents: [
+        VacDatepickerComponent,
+    ]
 })
 
 // Here, by loading 4 frameworks in JsonSchemaFormModule.forRoot(), the first,
