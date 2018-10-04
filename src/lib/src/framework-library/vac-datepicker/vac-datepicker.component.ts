@@ -62,6 +62,11 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
     public vacDatePickerOptions: IMyDpOptions = {
         // other options...
         dateFormat: 'dd/mm/yyyy',
+        disableUntil: {
+            year:1850,
+            month: 0,
+            day: 0
+        }
     };
     public model: any;
 
