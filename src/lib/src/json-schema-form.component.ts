@@ -97,6 +97,7 @@ export class JsonSchemaFormComponent implements DoCheck, OnChanges, OnInit {
   // Development inputs, for testing and debugging
   @Input() loadExternalAssets: boolean; // Load external framework assets?
   @Input() debug: boolean; // Show debug information?
+  @Input() datePickerOptions: any; // Custom datepicker options
 
   // Outputs
   @Output() onChanges = new EventEmitter<any>(); // Live unvalidated internal form data
@@ -141,6 +142,7 @@ export class JsonSchemaFormComponent implements DoCheck, OnChanges, OnInit {
    */
   private initializeOptions() {
     this.jsf.setOptions({ debug: !!this.debug });
+    this.jsf.setOptions({ datePickerOptions: this.datePickerOptions });
     let loadExternalAssets: boolean = this.loadExternalAssets || false;
     let framework: any = this.framework || 'default';
     if (isObject(this.options)) {

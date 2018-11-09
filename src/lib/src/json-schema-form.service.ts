@@ -77,6 +77,7 @@ export class JsonSchemaFormService {
     supressPropertyTitles: false,
     setSchemaDefaults: true,
     validateOnRender: false,
+    datePickerOptions: false,
     formDefaults: { // Default options for form controls
       addable: true, // Allow adding items to an array or $ref point?
       orderable: true, // Allow reordering items within an array?

@@ -5,13 +5,17 @@ import { JsonSchemaFormService } from '../../json-schema-form.service';
 import { dateToString, hasOwn, stringToDate } from '../../shared';
 import {IMyDpOptions,MyDatePickerModule} from 'mydatepicker';
 
+export interface IVacMyDpOptions extends IMyDpOptions{
+    messages? : object;
+}
+
 @Component({
     selector: 'vac-datepicker-widget',
     template: `      
     <div style="padding-bottom: 1.25em;">
         <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
           [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
-        <label class="vac-date-field-label">
+        <label class="vac-date-field-label" [ngStyle]="{'visibility':anythingWritten && anythingWritten.length > 0 ? 'visible' : 'hidden'}">
             {{options?.title}}
         </label>
         <my-date-picker [name]="controlName" [options]="vacDatePickerOptions"
@@ -57,15 +61,20 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
     controlDisabled = false;
     boundControl = false;
     options: any;
+    anythingWritten: string;
     autoCompleteList: string[] = [];
 
-    public vacDatePickerOptions: IMyDpOptions = {
+    public vacDatePickerOptions: IVacMyDpOptions = {
         // other options...
         dateFormat: 'dd/mm/yyyy',
         disableUntil: {
             year:1850,
             month: 0,
             day: 0
+        },
+        messages: {
+            "required": "Field is required",
+            "format": "Field must be in format {format}"
         }
     };
     public model: any;
@@ -79,6 +88,9 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
+        //console.log(this.jsf);
+        this.anythingWritten = "";
+
         var controlDate = stringToDate(this.controlValue);
 
         if(controlDate){
@@ -86,6 +98,10 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
         }
         else{
             this.model = { date: { year: "", month: "", day: ""}}
+        }
+
+        if(this.jsf && this.jsf.globalOptions && this.jsf.globalOptions.datePickerOptions && typeof this.jsf.globalOptions.datePickerOptions == 'object'){
+            this.vacDatePickerOptions = this.jsf.globalOptions.datePickerOptions;
         }
 
         this.options = this.layoutNode.options || {};
@@ -113,6 +129,7 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
     updateValue(event) {
         this.options.showErrors = true;
         this.jsf.updateValue(this, dateToString(event.value, this.options));
+        this.anythingWritten = event.value;
 
         if(!event.valid && event.value != ""){
 
@@ -120,11 +137,11 @@ export class VacDatepickerComponent implements OnInit, OnChanges {
                 this.options.errorMessage = this.options.validationMessage;
             }
             else if (!this.options.validationMessage || this.options.validationMessage == ""){
-                this.options.errorMessage = "Field must be in format " + this.options.dateFormat;
+                this.options.errorMessage = this.vacDatePickerOptions.messages["format"].replace("{format}",this.options.dateFormat);
             }
         }
         else if(!event.valid && event.value == "" && this.options.required){
-            this.options.errorMessage = "Field is required";
+            this.options.errorMessage = this.vacDatePickerOptions.messages["required"];
         }
         else{
             this.options.errorMessage = "";
